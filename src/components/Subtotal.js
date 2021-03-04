@@ -1,12 +1,15 @@
 import React from 'react'
 import CurrencyFormat from 'react-currency-format'
 
+import { useHistory } from 'react-router-dom'
+
 import { useStateValue } from '../StateProvider'
 import { getCartTotal } from "../reducer";
 
 import '../styles/Subtotal.css'
 
 function Subtotal() {
+  const history = useHistory();
   const [{cart}, dispatch] = useStateValue();
 
   return (
@@ -27,10 +30,10 @@ function Subtotal() {
         value={getCartTotal(cart)} // Part of the homework
         displayType={"text"}
         thousandSeparator={true}
-        prefix={"KES"}
+        prefix={"KES. "}
       />
 
-      <button>Proceed to Checkout</button>
+    <button onClick={e => history.push('/payment')}>Proceed to Checkout</button>
     </div>
   )
 }
